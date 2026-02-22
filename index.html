@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مخمن كلمات السر الذكي</title>
+    <style>
+        body { font-family: sans-serif; background-color: #121212; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background: #1e1e1e; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-align: center; width: 350px; }
+        h1 { color: #4caf50; font-size: 1.5rem; }
+        input { width: 90%; padding: 12px; margin: 20px 0; border-radius: 8px; border: none; font-size: 1rem; text-align: center; }
+        .result { font-weight: bold; margin-top: 15px; padding: 10px; border-radius: 5px; min-height: 20px; }
+        .weak { color: #ff5252; border: 1px solid #ff5252; }
+        .medium { color: #ffd740; border: 1px solid #ffd740; }
+        .strong { color: #69f0ae; border: 1px solid #69f0ae; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>جرب قوة كلمة سرك 🛡️</h1>
+    <p>اكتب كلمة سر وشوف الموقع يگدر يحزرها؟</p>
+    <input type="password" id="passInput" placeholder="اكتب كلمة السر هنا..." oninput="checkPass()">
+    <div id="status" class="result">اكتب شيئاً...</div>
+</div>
+
+<script>
+    function checkPass() {
+        const pass = document.getElementById('passInput').value;
+        const status = document.getElementById('status');
+        
+        if (pass.length === 0) {
+            status.innerText = "اكتب شيئاً...";
+            status.className = "result";
+            return;
+        }
+
+        let strength = "";
+        let className = "";
+
+        if (pass.length < 6) {
+            strength = "تخمين سهل جداً! (ضعيفة جداً)";
+            className = "weak";
+        } else if (pass.length >= 6 && /[0-9]/.test(pass) && /[a-zA-Z]/.test(pass)) {
+            strength = "صعبة التخمين! (قوية)";
+            className = "strong";
+        } else {
+            strength = "ممكن تخمينها ببعض الوقت (متوسطة)";
+            className = "medium";
+        }
+
+        status.innerText = strength;
+        status.className = "result " + className;
+    }
+</script>
+
+</body>
+</html>
